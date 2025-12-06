@@ -20,7 +20,7 @@ custom:
         lore:
           - '&7This is the lore.'
         enchants:
-          - DAMAGE_ALL:5
+          - SHARPNESS:5
   ExampleSurprise2:
     enabled: false
     lucklevel: LUCKY
