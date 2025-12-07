@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.thebusybiscuit</groupId>
-    <artifactId>SlimefunLuckyBlocks</artifactId>
+    <artifactId>LuckyBlocks</artifactId>
     <version>UNOFFICIAL-1.21.10</version>
 
     <properties>
@@ -46,8 +46,8 @@
         <dependency>
             <groupId>com.github.slimefun</groupId>
             <artifactId>Slimefun4</artifactId>
-            <version>4.9</version>
-            <scope>provided</scope>
+            <version>5.0</version>
+            <scope>compile</scope>
         </dependency>
 
         <!-- bStats -->
@@ -64,6 +64,24 @@
 
         <finalName>${project.artifactId}-${project.version}</finalName>
 
+        <resources>
+            <!-- Filter only plugin.yml so ${project.version} is expanded, leave other resources untouched -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>plugin.yml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <excludes>
+                    <exclude>plugin.yml</exclude>
+                </excludes>
+            </resource>
+        </resources>
+
         <plugins>
             <!-- Shade bStats -->
             <plugin>
@@ -78,6 +96,13 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <!-- Only shade bStats to avoid bundling Slimefun or its libs -->
+                            <artifactSet>
+                                <includes>
+                                    <include>org.bstats:bstats-bukkit</include>
+                                    <include>org.bstats:bstats-base</include>
+                                </includes>
+                            </artifactSet>
                             <relocations>
                                 <relocation>
                                     <pattern>org.bstats</pattern>

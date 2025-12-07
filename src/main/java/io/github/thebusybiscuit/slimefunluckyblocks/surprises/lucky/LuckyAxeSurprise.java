@@ -18,7 +18,8 @@ public final class LuckyAxeSurprise implements Surprise {
 	
 	public LuckyAxeSurprise() {
 		axe = CustomItemStack.create(Material.GOLDEN_AXE, "&e&lLucky Axe");
-		axe.addEnchantment(Enchantment.SHARPNESS, 10);
+		// Use unsafe enchantment to allow levels above vanilla cap
+		axe.addUnsafeEnchantment(Enchantment.SHARPNESS, 10);
 		axe.addUnsafeEnchantment(Enchantment.EFFICIENCY, 10);
 		axe.addUnsafeEnchantment(Enchantment.FORTUNE, 10);
 		axe.addUnsafeEnchantment(Enchantment.UNBREAKING, 10);
